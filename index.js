@@ -11,20 +11,15 @@ import fs from 'fs'*/
 //---- codes snippets ---------------
 import inscription from './inscription.js'
 import publication from './publication.js'
+import client from './client.js'
 
 let con = mysql.createConnection({
         host: "localhost",
         user: "root",
         password: "root",
-        database: "brader"
+        database: "cupcake"
     })
-/*let con = mysql.createConnection({
-        host: "6.tcp.eu.ngrok.io",
-        user: "root",
-        password: "root",
-        port:11015,
-        database: "lostobject"
-    })*/
+
 //---------- express setting up --------------
 
 const app = express()
@@ -81,14 +76,11 @@ app.post('/inscription.php', (req, res) => {
 app.post('/publication.php', (req, res) => {
     publication(req,res,con)
 })
+app.post('/client.php', (req, res) => {
+    client(req,res,con)
+})
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
-})
-
-
-process.on('uncaughtException', err => {
-    console.log(`Uncaught Exception: ${err.message}`)
-    //process.exit(0)
 })
 
 /*------ session list -------------------------------------

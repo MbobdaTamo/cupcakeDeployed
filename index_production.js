@@ -9,14 +9,18 @@ import bodyParser from 'body-parser'
 import fileUpload from 'express-fileupload'
 import cors from 'cors'
 import history from 'connect-history-api-fallback'
+//---- codes snippets ---------------
+import inscription from './inscription.js'
+import publication from './publication.js'
+import client from './client.js'
 
 
-/*let con = mysql.createConnection({
-        host: "localhost",
-        user: "root",
-        password: "root",
-        database: "brader"
-    })*/
+let con = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "root",
+    database: "cupcake"
+})
 //---------- express setting up --------------
 
 const app = express()
@@ -72,6 +76,14 @@ app.post('/inscription.php', (req, res) => {
 app.post('/publication.php', (req, res) => {
     publication(req,res,con)
 })
+app.post('/client.php', (req, res) => {
+    client(req,res,con)
+})
+
+process.on('uncaughtException', err => {
+    console.log(`Uncaught Exception: ${err.message}`)
+    //process.exit(0)
+})
 
 
 let privateKey = fs.readFileSync( '/etc/letsencrypt/live/cupcake.sassayer.com/privkey.pem' )
@@ -82,12 +94,3 @@ https.createServer({
     cert: certificate
 }, app).listen(port);
 
-process.on('uncaughtException', err => {
-    console.log(`Uncaught Exception: ${err.message}`)
-    //process.exit(0)
-})
-
-/*------ session list -------------------------------------
-req.session.user : user infos in backend
-
-*/
