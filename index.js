@@ -1,4 +1,3 @@
-import mysql from 'mysql-await'
 import express from 'express'
 import cookieParser from 'cookie-parser'
 import session from 'express-session'
@@ -43,7 +42,7 @@ let cors1 = {origin:function(origin,callback){
 },methods:["POST","OPTIONS"],credentials:true}
 app.use(cors(cors1/*{methods:["POST","OPTIONS"],origin:"http://localhost:8080",credentials:true}*/))
 
-const port = 3000
+const port = 80
 
 // body parser to retrieve informations
 app.use(bodyParser.urlencoded({ extended: false }))
